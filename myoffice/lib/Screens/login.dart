@@ -42,7 +42,7 @@ class _Login extends State<Login> {
                   color: const Color(0xff6b59ff),
                   child: Container(
                     decoration: const BoxDecoration(
-                        color: Color(0xffF3E7E7),
+                        color: Color(0xffFCFAFE),
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(35),
                             topRight: Radius.circular(35))),
