@@ -28,8 +28,14 @@ class LeaveRequests extends StatelessWidget {
         body: Layout(
           child: ListView.builder(
             itemCount: emp.length,
-            itemBuilder: (BuildContext context, int index) =>
-                LeaveRequestCard(),
+            itemBuilder: (BuildContext context, int index) => LeaveRequestCard(
+              name: "Elon Musk",
+              postion: "Developer",
+              appliedDate: "10-04-2022",
+              leaveDate: "12-04-2022",
+              noLeaves: 5,
+              reason: "Personal",
+            ),
           ),
         ));
   }
