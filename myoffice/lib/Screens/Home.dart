@@ -46,8 +46,7 @@ class _Home extends State<Home> {
                                   topRight: Radius.circular(35))),
                           child: Padding(
                             padding: const EdgeInsets.all(14.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                            child: ListView(
                               children: [
                                 Row(
                                   mainAxisAlignment:
@@ -72,7 +71,37 @@ class _Home extends State<Home> {
                                 SizedBox(
                                   height: MediaQuery.of(context).size.width / 8,
                                 ),
-                                LongCard(),
+                                LongCard(
+                                    action: () {
+                                      print('add');
+                                    },
+                                    title: "Add Employee",
+                                    icon: EvaIcons.personAdd,
+                                    actionicon: EvaIcons.plusCircleOutline),
+                                LongCard(
+                                  action: () {
+                                    print('notice');
+                                  },
+                                  icon: EvaIcons.layoutOutline,
+                                  actionicon: EvaIcons.edit2,
+                                  title: "Notice Board",
+                                ),
+                                LongCard(
+                                  action: () {
+                                    print('suggestions');
+                                  },
+                                  icon: EvaIcons.email,
+                                  actionicon: EvaIcons.eye,
+                                  title: "Suggestions",
+                                ),
+                                LongCard(
+                                  action: () {
+                                    print('notice');
+                                  },
+                                  icon: EvaIcons.person,
+                                  actionicon: EvaIcons.settings,
+                                  title: "Edit Profile",
+                                ),
                               ],
                             ),
                           )),

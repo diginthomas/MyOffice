@@ -46,8 +46,7 @@ class _Login extends State<Login> {
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(35),
                             topRight: Radius.circular(35))),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                    child: ListView(
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
