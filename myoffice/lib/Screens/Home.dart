@@ -6,8 +6,6 @@ import 'package:myoffice/Widgets/LongCard.dart';
 import 'package:myoffice/Widgets/Layout.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
   @override
   _Home createState() {
     return _Home();
@@ -19,6 +17,12 @@ class _Home extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          title: const Padding(
+              padding: EdgeInsets.only(top: 12),
+              child: Text(
+                'Home',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              )),
           backgroundColor: Color(0xff6b59ff),
           elevation: 0.0,
           actions: [
@@ -38,7 +42,7 @@ class _Home extends State<Home> {
                     icon: EvaIcons.people,
                     title: " Employees",
                     action: () {
-                      print('emp');
+                      Navigator.pushNamed(context, '/allemp');
                     },
                   ),
                   SquareCard(
@@ -56,6 +60,7 @@ class _Home extends State<Home> {
               ),
               LongCard(
                   action: () {
+                    Navigator.pushNamed(context, '/leave');
                     print('add');
                   },
                   title: "Add Employee",

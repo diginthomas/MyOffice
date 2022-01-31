@@ -8,7 +8,7 @@ class Input extends StatelessWidget {
   final String hintText;
   final String leabel;
   bool password;
-  Input({Key? key, required this.hintText, required this.leabel, required this.controller ,this.password = false}) : super(key: key);
+  Input({required this.hintText, required this.leabel, required this.controller ,this.password = false});
 
   @override
   Widget build(BuildContext context) {

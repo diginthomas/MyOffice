@@ -5,7 +5,7 @@ class ActionButton extends StatelessWidget {
   final void Function() action;
   final Color color;
   ActionButton(
-      {Key? key, required this.title, required this.action, required this.color}) : super(key: key);
+      { required this.title, required this.action, required this.color});
   @override
   Widget build(BuildContext context) {
     return FlatButton(

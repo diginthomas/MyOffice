@@ -4,7 +4,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 class AppBarButton extends StatelessWidget {
   bool notification = false;
 
-  AppBarButton({Key? key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return Container(

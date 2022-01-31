@@ -5,7 +5,7 @@ import 'package:myoffice/Widgets/SubmitButton.dart';
 import 'package:myoffice/Widgets/Layout.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+ 
 
   @override
      _Login createState() {

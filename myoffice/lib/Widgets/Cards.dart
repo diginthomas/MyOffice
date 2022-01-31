@@ -5,7 +5,7 @@ class SquareCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final void Function() action;
-  SquareCard({Key? key, required this.icon, required this.title, required this.action}) : super(key: key);
+  SquareCard({ required this.icon, required this.title, required this.action});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

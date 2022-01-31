@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Layout extends StatelessWidget {
   Widget child;
-  Layout({Key? key, required this.child}) : super(key: key);
+  Layout({required this.child});
   @override
   Widget build(BuildContext context) {
     return Container(
