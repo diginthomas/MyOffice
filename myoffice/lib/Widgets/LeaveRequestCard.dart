@@ -13,14 +13,15 @@ class LeaveRequestCard extends StatelessWidget {
   final String leaveDate;
   final int noLeaves;
   final String reason;
- LeaveRequestCard({Key? key, 
-   required this.name,
-   required this.postion,
-   required this.appliedDate,
-   required this.leaveDate,
-   required this.noLeaves,
-   required this.reason
- }) : super(key: key);
+  LeaveRequestCard(
+      {Key? key,
+      required this.name,
+      required this.postion,
+      required this.appliedDate,
+      required this.leaveDate,
+      required this.noLeaves,
+      required this.reason})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +42,7 @@ class LeaveRequestCard extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
-             postion,
+              postion,
               style: GoogleFonts.sourceCodePro(
                   color: Color(0xff2D1D6B),
                   fontStyle: FontStyle.italic,
@@ -92,7 +93,7 @@ class LeaveRequestCard extends StatelessWidget {
                         style: style,
                       ),
                       Text(
-                       noLeaves.toString(),
+                        noLeaves.toString(),
                         style: style,
                       ),
                     ]),
@@ -103,7 +104,7 @@ class LeaveRequestCard extends StatelessWidget {
                   color: Color(0xffACACAC),
                 ),
                 Text(
-                  'Reason:'+reason,
+                  'Reason:' + reason,
                   style: style,
                 ),
                 Row(

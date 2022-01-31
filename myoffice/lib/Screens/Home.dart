@@ -1,4 +1,3 @@
-
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:myoffice/Widgets/AppbarButtion.dart';
@@ -46,7 +45,8 @@ class _Home extends State<Home> {
                     icon: EvaIcons.archive,
                     title: "Leave Requests",
                     action: () {
-                       Navigator.pushNamed(context, '/leave');
+                      print('object');
+                      Navigator.pushNamed(context, '/leave');
                     },
                   )
                 ],
