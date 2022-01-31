@@ -8,10 +8,10 @@ class LongCard extends StatelessWidget {
   final IconData icon;
   final IconData actionicon;
   LongCard(
-      {required this.action,
+      {Key? key, required this.action,
       required this.title,
       required this.icon,
-      required this.actionicon});
+      required this.actionicon}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

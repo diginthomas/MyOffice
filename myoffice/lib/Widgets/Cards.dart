@@ -1,4 +1,3 @@
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -6,7 +5,7 @@ class SquareCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final void Function() action;
-  SquareCard({required this.icon, required this.title, required this.action});
+  SquareCard({Key? key, required this.icon, required this.title, required this.action}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

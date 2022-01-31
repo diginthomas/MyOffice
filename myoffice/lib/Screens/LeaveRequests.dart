@@ -5,6 +5,8 @@ import 'package:myoffice/Widgets/LeaveRequestCard.dart';
 
 class LeaveRequests extends StatelessWidget {
   List<String> emp = ['digin', 'tom', 'tony', 'cris'];
+
+  LeaveRequests({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

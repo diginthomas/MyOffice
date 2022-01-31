@@ -7,6 +7,8 @@ import 'package:myoffice/Widgets/LongCard.dart';
 import 'package:myoffice/Widgets/Layout.dart';
 
 class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
   _Home createState() {
     return _Home();

@@ -13,14 +13,14 @@ class LeaveRequestCard extends StatelessWidget {
   final String leaveDate;
   final int noLeaves;
   final String reason;
- LeaveRequestCard({
+ LeaveRequestCard({Key? key, 
    required this.name,
    required this.postion,
    required this.appliedDate,
    required this.leaveDate,
    required this.noLeaves,
    required this.reason
- });
+ }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

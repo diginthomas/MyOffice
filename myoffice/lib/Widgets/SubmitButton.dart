@@ -4,7 +4,7 @@ class SubmitButton extends StatelessWidget {
   final String name;
   final void Function() action;
   final Color color;
-  SubmitButton({required this.name, required this.action, required this.color});
+  SubmitButton({Key? key, required this.name, required this.action, required this.color}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
