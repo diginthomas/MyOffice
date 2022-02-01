@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:myoffice/Widgets/AppbarButtion.dart';
 import 'package:myoffice/Widgets/Layout.dart';
-import 'package:myoffice/Widgets/EmpLongCard.dart';
+import 'package:myoffice/Widgets/ViewCard.dart';
 
-class AllEmp extends StatefulWidget {
+class ViewEmp extends StatefulWidget {
   @override
-  _AllEmp createState() {
-    return _AllEmp();
+  _ViewEmp createState() {
+    return _ViewEmp();
   }
 }
 
-class _AllEmp extends State<AllEmp> {
-  List<String> emp = ['digin', 'tom', 'tony', 'cris'];
+class _ViewEmp extends State<ViewEmp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +18,7 @@ class _AllEmp extends State<AllEmp> {
         title: const Padding(
           padding: EdgeInsets.only(top: 12),
           child: Text(
-            ' All Employees',
+            'Digin Thomas',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
@@ -33,13 +32,10 @@ class _AllEmp extends State<AllEmp> {
         ],
       ),
       body: Layout(
-          child: ListView.builder(
-              itemCount: emp.length,
-              itemBuilder: (BuildContext context, int index) => EmpLongCard(
-                id: 1,
-                name: "Digin Thomas",
-                postion: 'Php Developer',
-              ))),
+        child: ListView(
+          children: [ViewCard()],
+        ),
+      ),
     );
   }
 }

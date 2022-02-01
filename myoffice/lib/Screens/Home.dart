@@ -4,6 +4,7 @@ import 'package:myoffice/Widgets/AppbarButtion.dart';
 import 'package:myoffice/Widgets/Cards.dart';
 import 'package:myoffice/Widgets/LongCard.dart';
 import 'package:myoffice/Widgets/Layout.dart';
+import 'package:myoffice/Screens/Suggestions.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -76,7 +77,7 @@ class _Home extends State<Home> {
               ),
               LongCard(
                 action: () {
-                  print('suggestions');
+                  Navigator.pushNamed(context, '/suggestion');
                 },
                 icon: EvaIcons.email,
                 actionicon: EvaIcons.eye,

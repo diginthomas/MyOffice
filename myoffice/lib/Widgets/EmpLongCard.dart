@@ -3,29 +3,34 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:myoffice/Widgets/Actionbutton.dart';
 
 class EmpLongCard extends StatelessWidget {
+  final String name;
+  final String postion;
+  final int id;
+  EmpLongCard({required this.id, required this.name, required this.postion});
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(top: 9.0),
+        margin: EdgeInsets.only(top: 12.0),
         width: MediaQuery.of(context).size.width / 2,
-        height: MediaQuery.of(context).size.width / 1.8,
         decoration: BoxDecoration(
             color: Color(0xffF7F2FD), borderRadius: BorderRadius.circular(20)),
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           ListTile(
             title: Text(
-              'digin ',
+              name,
               style: GoogleFonts.sourceCodePro(
                   color: Color(0xff2D1D6B),
                   fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0),
             ),
             subtitle: Text(
-              'dev',
+              postion,
               style: GoogleFonts.sourceCodePro(
                   color: Color(0xff2D1D6B),
                   fontStyle: FontStyle.italic,
-                  letterSpacing: 3),
+                  letterSpacing: 3,
+                  fontSize: 10.0),
             ),
             leading: CircleAvatar(
               backgroundColor: Colors.amber,
@@ -34,35 +39,12 @@ class EmpLongCard extends StatelessWidget {
             ),
             trailing: ActionButton(
               action: () {
-                print('d');
+                Navigator.pushNamed(context, '/viewemp');
               },
               color: Color(0xffEE846D),
               title: "View",
             ),
           ),
-          Divider(
-            height: 14,
-            color: Color(0xffACACAC),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ActionButton(
-                title: ' Edit ',
-                action: () {
-                  print('ok');
-                },
-                color: Color(0xff0043A4),
-              ),
-              ActionButton(
-                title: ' Delete ',
-                action: () {
-                  print('reject');
-                },
-                color: Colors.redAccent,
-              )
-            ],
-          )
         ]));
   }
 }
