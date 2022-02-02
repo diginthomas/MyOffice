@@ -3,17 +3,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:myoffice/Widgets/InputFields.dart';
 import 'package:myoffice/Widgets/SubmitButton.dart';
 import 'package:myoffice/Widgets/Layout.dart';
+import 'package:myoffice/Services/Networking.dart';
+import 'package:myoffice/Widgets/ErrorText.dart';
 
 class Login extends StatefulWidget {
- 
-
   @override
-     _Login createState() {
+  _Login createState() {
     return _Login();
   }
 }
 
 class _Login extends State<Login> {
+  bool status = true;
+  bool idrror = true;
+  bool psserror = true;
   final TextEditingController id = TextEditingController();
   final TextEditingController password = TextEditingController();
   @override
@@ -57,16 +60,31 @@ class _Login extends State<Login> {
               controller: password,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 14, right: 14),
-              child: SubmitButton(
-                  name: "login",
-                  action: () {
-                    print(id.text);
-                    print(password.text);
-                    Navigator.pushNamed(context, '/home');
-                  },
-                  color: Color(0xff767EED)),
-            )
+                padding: const EdgeInsets.only(left: 14, right: 14),
+                child: SubmitButton(
+                    name: status ? "login" : "Loading...",
+                    action: () async {
+                      // setState(() {
+                      //   status = !status;
+                      // });
+                      // var auth = Auth();
+                      // var result = await auth.authUser(id.text, password.text);
+                      // print(result);
+                      // if (result == '2') {
+                        Navigator.pushNamed(context, '/home');
+                      // } else if (result == '1') {
+                      //   setState(() {
+                      //     psserror = true;
+                      //     status = !status;
+                      //   });
+                      // } else {
+                      //   setState(() {
+                      //     idrror = true;
+                      //     status = !status;
+                      //   });
+                      // }
+                    },
+                    color: Color(0xff767EED)))
           ],
         ),
       )),

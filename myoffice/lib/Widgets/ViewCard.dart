@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myoffice/Widgets/EmpCardText.dart';
 import 'package:myoffice/Widgets/Actionbutton.dart';
+import 'package:myoffice/Services/Models/Users.dart';
 
 class ViewCard extends StatelessWidget {
+  User user;
+  ViewCard({required this.user});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,14 +26,14 @@ class ViewCard extends StatelessWidget {
                   backgroundImage: AssetImage('assets/images/elon.jpg'),
                 ),
                 Text(
-                  'Digin Thomas',
+                  user.name,
                   style: GoogleFonts.sourceCodePro(
                       color: Color(0xff2D1D6B),
                       fontWeight: FontWeight.bold,
                       fontSize: MediaQuery.of(context).size.width / 14),
                 ),
                 Text(
-                  'Developer',
+                  user.postion,
                   style: GoogleFonts.sourceCodePro(
                       color: Color(0xff2D1D6B),
                       fontWeight: FontWeight.w400,
@@ -45,18 +48,18 @@ class ViewCard extends StatelessWidget {
                     children: [
                       EmpCardText(
                         title: "Joined Date",
-                        value: '10/02/2020',
+                        value: user.joineddate,
                       ),
                       EmpCardText(
                         title: 'Salary',
-                        value: '14000',
+                        value: user.salary.toString(),
                       ),
                       EmpCardText(
                         title: 'Address',
-                        value: 'some address',
+                        value: user.addredss,
                       ),
-                      EmpCardText(title: 'Email', value: 'email@gmail.com'),
-                      EmpCardText(title: 'Phone', value: '9874455415'),
+                      EmpCardText(title: 'Email', value: user.email),
+                      EmpCardText(title: 'Phone', value: user.phone),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [

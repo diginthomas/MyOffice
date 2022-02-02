@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myoffice/Services/Models/Users.dart';
 import 'package:myoffice/Widgets/AppbarButtion.dart';
 import 'package:myoffice/Widgets/Layout.dart';
 import 'package:myoffice/Widgets/ViewCard.dart';
@@ -13,12 +14,14 @@ class ViewEmp extends StatefulWidget {
 class _ViewEmp extends State<ViewEmp> {
   @override
   Widget build(BuildContext context) {
+    final arguments = ModalRoute.of(context)?.settings.arguments as Map;
+    User user = arguments['user'];
     return Scaffold(
       appBar: AppBar(
-        title: const Padding(
+        title: Padding(
           padding: EdgeInsets.only(top: 12),
           child: Text(
-            'Digin Thomas',
+            user.name,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
@@ -33,7 +36,11 @@ class _ViewEmp extends State<ViewEmp> {
       ),
       body: Layout(
         child: ListView(
-          children: [ViewCard()],
+          children: [
+            ViewCard(
+              user: user,
+            )
+          ],
         ),
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myoffice/Widgets/AppbarButtion.dart';
 import 'package:myoffice/Widgets/Layout.dart';
 import 'package:myoffice/Widgets/EmpLongCard.dart';
+import 'package:myoffice/Services/Networking.dart';
 
 class AllEmp extends StatefulWidget {
   @override
@@ -11,7 +12,8 @@ class AllEmp extends StatefulWidget {
 }
 
 class _AllEmp extends State<AllEmp> {
-  List<String> emp = ['digin', 'tom', 'tony', 'cris'];
+  Networking service = Networking();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,13 +35,23 @@ class _AllEmp extends State<AllEmp> {
         ],
       ),
       body: Layout(
-          child: ListView.builder(
-              itemCount: emp.length,
-              itemBuilder: (BuildContext context, int index) => EmpLongCard(
-                id: 1,
-                name: "Digin Thomas",
-                postion: 'Php Developer',
-              ))),
+          child: StreamBuilder(
+              stream: service.getAllUser().asStream(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.data != null) {
+                  return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          EmpLongCard(
+                            user: snapshot.data[index],
+                            name: snapshot.data[index].name,
+                            postion: snapshot.data[index].postion,
+                          ));
+                }
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              })),
     );
   }
 }
