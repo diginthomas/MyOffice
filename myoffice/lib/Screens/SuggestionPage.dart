@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:myoffice/Widgets/AppbarButtion.dart';
 import 'package:myoffice/Widgets/Layout.dart';
+import 'package:myoffice/Widgets/SuggestionCard.dart';
 
-class Suggestion extends StatefulWidget {
+class SuggestionPage extends StatefulWidget {
   @override
-  _Suggestion createState() {
-    return _Suggestion();
+  _SuggestionPage createState() {
+    return _SuggestionPage();
   }
 }
 
-class _Suggestion extends State<Suggestion> {
+class _SuggestionPage extends State<SuggestionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,9 @@ class _Suggestion extends State<Suggestion> {
         ],
       ),
       body: Layout(
-        child: ListView(),
+        child: ListView.builder(
+            itemCount: 4,
+            itemBuilder: (BuildContext context, int index) => SuggestionCard()),
       ),
     );
   }

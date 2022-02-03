@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:myoffice/Screens/LeaveRequests.dart';
-import 'package:myoffice/Screens/Notice.dart';
+import 'package:myoffice/Screens/Notice_Board.dart';
 import 'package:myoffice/Screens/login.dart';
 import 'package:myoffice/Screens/Home.dart';
 import 'package:myoffice/Screens/AllEmp.dart';
 import 'package:myoffice/Screens/ViewEmp.dart';
-import 'package:myoffice/Screens/Suggestions.dart';
+import 'package:myoffice/Screens/SuggestionPage.dart';
 import 'package:myoffice/Services/Networking.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
         '/leave': (context) => LeaveRequests(),
         '/allemp': (context) => AllEmp(),
         '/viewemp': (context) => ViewEmp(),
-        '/suggestion': (context) => Suggestion(),
-        '/notice':(context)=>Notice()
+        '/suggestion': (context) => SuggestionPage(),
+        '/notice':(context)=>NoticeBoard()
       }),
     );
   }

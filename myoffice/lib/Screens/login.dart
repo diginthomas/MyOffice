@@ -52,12 +52,13 @@ class _Login extends State<Login> {
             SizedBox(
               height: 5,
             ),
-            Input(hintText: "employee id", leabel: "Id", controller: id),
+            Input(hintText: "employee id", leabel: "Id", controller: id,charSize: 10,),
             Input(
               hintText: "Password",
               leabel: "Password",
               password: true,
               controller: password,
+              charSize: 20,
             ),
             Padding(
                 padding: const EdgeInsets.only(left: 14, right: 14),

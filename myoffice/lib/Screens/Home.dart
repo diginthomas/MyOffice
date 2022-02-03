@@ -5,7 +5,7 @@ import 'package:myoffice/Widgets/AppbarButtion.dart';
 import 'package:myoffice/Widgets/Cards.dart';
 import 'package:myoffice/Widgets/LongCard.dart';
 import 'package:myoffice/Widgets/Layout.dart';
-import 'package:myoffice/Screens/Suggestions.dart';
+import 'package:myoffice/Screens/SuggestionPage.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {

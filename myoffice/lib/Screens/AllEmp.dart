@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:myoffice/Widgets/AppbarButtion.dart';
+import 'package:myoffice/Widgets/ErrorMsg.dart';
 import 'package:myoffice/Widgets/Layout.dart';
 import 'package:myoffice/Widgets/EmpLongCard.dart';
 import 'package:myoffice/Services/Networking.dart';
+import 'package:myoffice/Widgets/LoadingAnimator.dart';
 
 class AllEmp extends StatefulWidget {
   @override
@@ -31,26 +33,26 @@ class _AllEmp extends State<AllEmp> {
           AppBarButton(),
           SizedBox(
             width: MediaQuery.of(context).size.width / 18,
-          )
+)
         ],
       ),
       body: Layout(
-          child: StreamBuilder(
-              stream: service.getAllUser().asStream(),
+          child: FutureBuilder(
+              future: service.getAllUser(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.data != null) {
-                  return ListView.builder(
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext context, int index) =>
-                          EmpLongCard(
-                            user: snapshot.data[index],
-                            name: snapshot.data[index].name,
-                            postion: snapshot.data[index].postion,
-                          ));
+                  return snapshot.data == []
+                      ? ListView.builder(
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (BuildContext context, int index) =>
+                              EmpLongCard(
+                                user: snapshot.data[index],
+                                name: snapshot.data[index].name,
+                                postion: snapshot.data[index].postion,
+                              ))
+                      : Errormsg();
                 }
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+                return LoadingAnimator();
               })),
     );
   }
