@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:myoffice/Services/Models/Users.dart';
 import 'dart:convert';
+import 'package:myoffice/Services/Models/Notice.dart';
 
 class Networking extends ChangeNotifier {
   final String url = 'https://myofficerest.herokuapp.com/office';
-  late final String response;
+  // late final String response;
+
   Future<String> authUser(String userid, String password) async {
     var response = await http.post(Uri.parse(url + '/user/login'),
         body: {'userid': '$userid', 'password': '$password'});
@@ -40,7 +42,40 @@ class Networking extends ChangeNotifier {
         user.add(userdata);
       }
     }
-
     return user;
+  }
+
+  Future<List<Notice>> getNotice() async {
+    List<Notice> notice = [];
+    var response = await http.get(Uri.parse(url + '/notice/get'));
+    if (response.statusCode == 200) {
+      List data = jsonDecode(response.body);
+      for (int i = 0; i < data.length; i++) {
+        Notice noticedata = Notice(
+            id: data[i]['id'],
+            content: data[i]['content'],
+            date: data[i]['date']);
+        notice.add(noticedata);
+      }
+      return notice;
+    }
+    return notice;
+  }
+
+  Future<bool> addNotice(Notice notice) async {
+    var response = await http.post(Uri.parse(url + '/notice/add'),
+        body: {'content': notice.content, 'date': notice.date});
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> deleteNotice(int id) async {
+    var response = await http.delete(Uri.parse(url + '/notice/$id'));
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
   }
 }

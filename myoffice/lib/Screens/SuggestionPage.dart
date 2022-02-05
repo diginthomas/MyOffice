@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myoffice/Services/Models/Suggestion.dart';
 import 'package:myoffice/Widgets/AppbarButtion.dart';
 import 'package:myoffice/Widgets/Layout.dart';
 import 'package:myoffice/Widgets/SuggestionCard.dart';
@@ -34,7 +35,12 @@ class _SuggestionPage extends State<SuggestionPage> {
       body: Layout(
         child: ListView.builder(
             itemCount: 4,
-            itemBuilder: (BuildContext context, int index) => SuggestionCard()),
+            itemBuilder: (BuildContext context, int index) => SuggestionCard(
+                  suggestion: Suggestion(
+                      content: "more lunch brak",
+                      id: 1,
+                      date: DateTime.now().toString().substring(0, 10)),
+                )),
       ),
     );
   }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:myoffice/Widgets/AppbarActionbutton.dart';
 import 'package:myoffice/Widgets/BottomSheetInput.dart';
+import 'package:myoffice/Widgets/ErrorMsg.dart';
 import 'package:myoffice/Widgets/Layout.dart';
+import 'package:myoffice/Widgets/LoadingAnimator.dart';
 import 'package:myoffice/Widgets/NoticeMessage.dart';
 import 'package:myoffice/Services/Models/Notice.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:myoffice/Services/Networking.dart';
 
 class NoticeBoard extends StatefulWidget {
   @override
@@ -14,6 +17,7 @@ class NoticeBoard extends StatefulWidget {
 }
 
 class _NoticeBoard extends State<NoticeBoard> {
+  Networking networking = Networking();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,12 +46,27 @@ class _NoticeBoard extends State<NoticeBoard> {
         ],
       ),
       body: Layout(
-          child: ListView.builder(
-        itemCount: 6,
-        itemBuilder: (BuildContext context, int index) => NoticeMessage(
-            notice: Notice(
-                content: 'sunday is holyday', id: 4, date: DateTime.now())),
-      )),
+          child: FutureBuilder(
+              future: networking.getNotice(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
+                  return snapshot.data != []
+                      ? ListView.builder(
+                          itemCount: snapshot.data?.length,
+                          itemBuilder: (context, index) => NoticeMessage(
+                            notice: snapshot.data[index],
+                            action: () {
+                              setState(() {
+                                networking
+                                    .deleteNotice(snapshot.data[index].id);
+                              });
+                            },
+                          ),
+                        )
+                      : Errormsg();
+                }
+                return LoadingAnimator();
+              })),
     );
   }
 }

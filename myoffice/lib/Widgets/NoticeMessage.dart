@@ -5,8 +5,9 @@ import 'package:myoffice/Services/Models/Notice.dart';
 
 class NoticeMessage extends StatelessWidget {
   final Notice notice;
+  final VoidCallback action;
 
-  NoticeMessage({required this.notice});
+  NoticeMessage({required this.notice, required this.action});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,16 +22,14 @@ class NoticeMessage extends StatelessWidget {
                 fontWeight: FontWeight.bold, color: Color(0xff2D1D6B)),
           ),
           subtitle: Text(
-            notice.date.toString(),
+            notice.date,
             style: GoogleFonts.sourceCodePro(
                 color: Color(0xff2D1D6B), fontWeight: FontWeight.w300),
           ),
           trailing: Padding(
             padding: const EdgeInsets.only(left: 12.0),
             child: ActionButton(
-              action: () {
-                print('delete');
-              },
+              action:action,
               color: Colors.redAccent,
               title: 'Delete',
             ),
