@@ -6,3 +6,8 @@ Simple app for office management<br>
 2.Home Screen
 
 <img src="https://user-images.githubusercontent.com/63897737/151525104-298542ea-fb6c-4435-a0c6-206a447566cd.jpeg" alt="drawing" width="200"/>
+
+<img src="https://user-images.githubusercontent.com/63897737/152628282-309abec9-6d93-458d-be60-d815b1340bb4.jpeg" alt="drawing" width="200"/>
+
+
+
