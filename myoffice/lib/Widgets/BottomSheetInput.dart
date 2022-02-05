@@ -49,11 +49,10 @@ class _BottomSheetInputState extends State<BottomSheetInput> {
                     },
                     color: Color(0xff0043A4))
                 : Center(
-                    child: Expanded(
-                        child: LoadingAnimationWidget.staggeredDotsWave(
+                    child: LoadingAnimationWidget.staggeredDotsWave(
                       color: const Color(0xff6b59ff),
                       size: MediaQuery.of(context).size.width / 8,
-                    )),
+                    ),
                   ),
           )
         ],
