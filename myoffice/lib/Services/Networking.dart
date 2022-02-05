@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:myoffice/Services/Models/Users.dart';
 import 'dart:convert';
 import 'package:myoffice/Services/Models/Notice.dart';
+import 'package:myoffice/Services/Models/Suggestion.dart';
 
 class Networking extends ChangeNotifier {
   final String url = 'https://myofficerest.herokuapp.com/office';
@@ -73,6 +74,34 @@ class Networking extends ChangeNotifier {
 
   Future<bool> deleteNotice(int id) async {
     var response = await http.delete(Uri.parse(url + '/notice/$id'));
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<List<Suggestion>> getSuggestion() async {
+    List<Suggestion> suggestion = [];
+    var response = await http.get(Uri.parse(url + '/suggestion/get'));
+    if (response.statusCode == 200) {
+      List data = jsonDecode(response.body);
+      for (int i = 0; i < data.length; i++) {
+        Suggestion suggestiondata = Suggestion(
+            id: data[i]['id'],
+            content: data[i]['content'],
+            date: data[i]['date'],
+            upvote: data[i]['upvote'],
+            downvote: data[i]['downvote']);
+        suggestion.add(suggestiondata);
+      }
+      return suggestion;
+    }
+    return suggestion;
+  }
+
+  Future<bool> voteSuggestion({required int id, required int vote}) async {
+    var response = await http.patch(Uri.parse(url + '/suggestion/update'),
+        body: {'id': id.toString(), 'vote': vote.toString()});
     if (response.statusCode == 200) {
       return true;
     }

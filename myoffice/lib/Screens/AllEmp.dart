@@ -33,7 +33,7 @@ class _AllEmp extends State<AllEmp> {
           AppBarButton(),
           SizedBox(
             width: MediaQuery.of(context).size.width / 18,
-)
+          )
         ],
       ),
       body: Layout(
@@ -41,7 +41,7 @@ class _AllEmp extends State<AllEmp> {
               future: service.getAllUser(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.data != null) {
-                  return snapshot.data == []
+                  return snapshot.data != []
                       ? ListView.builder(
                           itemCount: snapshot.data.length,
                           itemBuilder: (BuildContext context, int index) =>

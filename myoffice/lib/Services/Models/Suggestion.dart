@@ -7,6 +7,6 @@ class Suggestion {
       {required this.id,
       required this.content,
       required this.date,
-      this.upvote = 0,
+      this.upvote = 1,
       this.downvote = 0});
 }

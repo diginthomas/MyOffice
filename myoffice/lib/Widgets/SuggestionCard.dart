@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myoffice/Services/Networking.dart';
 import 'package:myoffice/Widgets/Actionbutton.dart';
 import 'package:myoffice/Services/Models/Suggestion.dart';
 
@@ -12,11 +13,17 @@ class SuggestionCard extends StatefulWidget {
 
 class _SuggestionCardState extends State<SuggestionCard> {
   bool vote = false;
-
-  void submit() {
+  Networking networking = Networking();
+  void submit(int id, int value) {
     setState(() {
       vote = true;
+      if (value == 1) {
+        widget.suggestion.upvote++;
+      } else {
+        widget.suggestion.downvote++;
+      }
     });
+    networking.voteSuggestion(id: id, vote: value);
   }
 
   @override
@@ -53,13 +60,17 @@ class _SuggestionCardState extends State<SuggestionCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     IconButton(
-                        onPressed: submit,
+                        onPressed: () {
+                          submit(widget.suggestion.id, 1);
+                        },
                         icon: Icon(
                           Icons.thumb_up,
-                          color: Color(0xffC6E2FF),
+                          color: Color(0xff0043A4),
                         )),
                     IconButton(
-                        onPressed: submit,
+                        onPressed: () {
+                          submit(widget.suggestion.id, 0);
+                        },
                         icon: Icon(
                           Icons.thumb_down,
                           color: Colors.redAccent,
@@ -74,26 +85,26 @@ class _SuggestionCardState extends State<SuggestionCard> {
                       Text(
                         widget.suggestion.upvote.toString(),
                         style: GoogleFonts.sourceCodePro(
-                            color: Color(0xffC6E2FF),
-                            fontSize: 12,
+                            color: Color(0xff0043A4),
+                            fontSize: 16,
                             fontStyle: FontStyle.italic),
                       ),
                       Icon(
                         Icons.thumb_up,
-                        color: Color(0xffC6E2FF),
-                        size: 16,
+                        color: Color(0xff0043A4),
+                        size: 25,
                       ),
                       Text(
                         widget.suggestion.downvote.toString(),
                         style: GoogleFonts.sourceCodePro(
                             color: Colors.redAccent,
-                            fontSize: 12,
+                            fontSize: 16,
                             fontStyle: FontStyle.italic),
                       ),
                       Icon(
                         Icons.thumb_down,
                         color: Colors.redAccent,
-                        size: 16,
+                        size: 25,
                       ),
                     ],
                   ),
