@@ -107,4 +107,25 @@ class Networking extends ChangeNotifier {
     }
     return false;
   }
+
+  Future<bool> addEmployee(
+      {required User user, required String password}) async {
+    final response = await http.post(Uri.parse(url + '/admin/create'), body: {
+      'name': user.name,
+      'userid': user.userid.toString(),
+      'address': user.addredss,
+      'mobile': user.phone,
+      'email': user.email,
+      'password': password,
+      'joiningdate': user.joineddate,
+      'qualification': user.qualification,
+      'jobposition': user.postion,
+      'salary': user.salary.toString()
+    });
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
+  }
 }

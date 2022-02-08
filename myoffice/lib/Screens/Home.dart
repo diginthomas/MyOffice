@@ -63,8 +63,7 @@ class _Home extends State<Home> {
               ),
               LongCard(
                   action: () {
-                    Navigator.pushNamed(context, '/leave');
-                    print('add');
+                    Navigator.pushNamed(context, '/addemp');
                   },
                   title: "Add Employee",
                   icon: EvaIcons.personAdd,

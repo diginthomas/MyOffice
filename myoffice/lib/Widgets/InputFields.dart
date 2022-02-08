@@ -7,12 +7,14 @@ class Input extends StatelessWidget {
   final String leabel;
   bool autofocus, password;
   final int charSize;
+  TextInputType keybordtype;
   Input(
       {required this.hintText,
       required this.leabel,
       required this.controller,
       this.password = false,
       this.autofocus = false,
+      this.keybordtype=TextInputType.text,
       required this.charSize});
 
   @override
@@ -26,7 +28,7 @@ class Input extends StatelessWidget {
         autofocus: autofocus ? true : false,
         controller: controller,
         obscureText: password ? true : false,
-        keyboardType: TextInputType.text,
+        keyboardType: keybordtype,
         cursorColor: const Color(0xffB2ABFF),
         decoration: InputDecoration(
             label: Text(
