@@ -23,7 +23,7 @@ class ViewCard extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor: Color(0xffF2F1F0),
                   radius: MediaQuery.of(context).size.width / 8,
-                  backgroundImage: AssetImage('assets/images/elon.jpg'),
+                  backgroundImage: AssetImage('assets/images/profile.png'),
                 ),
                 Text(
                   user.name,

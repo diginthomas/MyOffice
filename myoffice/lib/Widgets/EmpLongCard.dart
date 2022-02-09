@@ -6,8 +6,8 @@ import 'package:myoffice/Widgets/Actionbutton.dart';
 class EmpLongCard extends StatelessWidget {
   final String name;
   final String postion;
-  final User user ;
-  EmpLongCard({ required this.name, required this.postion,required this.user});
+  final User user;
+  EmpLongCard({required this.name, required this.postion, required this.user});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,13 +36,12 @@ class EmpLongCard extends StatelessWidget {
             leading: CircleAvatar(
               backgroundColor: Colors.amber,
               radius: MediaQuery.of(context).size.width / 13.0,
-              backgroundImage: const AssetImage('assets/images/elon.jpg'),
+              backgroundImage: const AssetImage('assets/images/profile.png'),
             ),
             trailing: ActionButton(
               action: () {
                 Navigator.pushNamed(context, '/viewemp',
-                arguments: {'user':user}
-                );
+                    arguments: {'user': user});
               },
               color: Color(0xffEE846D),
               title: "View",

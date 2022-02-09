@@ -1,25 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myoffice/Widgets/Actionbutton.dart';
+import 'package:myoffice/Services/Models/Leave.dart';
 
 final TextStyle style = GoogleFonts.sourceCodePro(
   color: Color(0xff2D1D6B),
 );
 
 class LeaveRequestCard extends StatelessWidget {
-  final String name;
-  final String postion;
-  final String appliedDate;
-  final String leaveDate;
-  final int noLeaves;
-  final String reason;
-  LeaveRequestCard(
-      {required this.name,
-      required this.postion,
-      required this.appliedDate,
-      required this.leaveDate,
-      required this.noLeaves,
-      required this.reason});
+  final Leave leave;
+  LeaveRequestCard({required this.leave});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,14 +23,14 @@ class LeaveRequestCard extends StatelessWidget {
         children: [
           ListTile(
             title: Text(
-              name,
+              leave.name,
               style: GoogleFonts.sourceCodePro(
                   color: Color(0xff2D1D6B),
                   fontStyle: FontStyle.italic,
                   fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
-              postion,
+              leave.postion,
               style: GoogleFonts.sourceCodePro(
                   color: Color(0xff2D1D6B),
                   fontStyle: FontStyle.italic,
@@ -49,7 +39,7 @@ class LeaveRequestCard extends StatelessWidget {
             leading: CircleAvatar(
               backgroundColor: Colors.amber,
               radius: MediaQuery.of(context).size.width / 13.0,
-              backgroundImage: const AssetImage('assets/images/elon.jpg'),
+              backgroundImage: const AssetImage('assets/images/profile.png'),
             ),
           ),
           Container(
@@ -69,7 +59,7 @@ class LeaveRequestCard extends StatelessWidget {
                         style: style,
                       ),
                       Text(
-                        appliedDate,
+                        leave.appliedDate,
                         style: style,
                       ),
                     ]),
@@ -79,7 +69,7 @@ class LeaveRequestCard extends StatelessWidget {
                         style: style,
                       ),
                       Text(
-                        leaveDate,
+                        leave.leaveDate,
                         style: GoogleFonts.sourceCodePro(
                             color: Colors.redAccent,
                             fontWeight: FontWeight.bold),
@@ -91,7 +81,7 @@ class LeaveRequestCard extends StatelessWidget {
                         style: style,
                       ),
                       Text(
-                        noLeaves.toString(),
+                        leave.noLeave.toString(),
                         style: style,
                       ),
                     ]),
@@ -102,7 +92,7 @@ class LeaveRequestCard extends StatelessWidget {
                   color: Color(0xffACACAC),
                 ),
                 Text(
-                  'Reason:' + reason,
+                  'Reason:' + leave.reason,
                   style: style,
                 ),
                 Row(

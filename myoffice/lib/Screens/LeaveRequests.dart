@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:myoffice/Services/Models/Leave.dart';
 import 'package:myoffice/Widgets/AppbarButtion.dart';
 import 'package:myoffice/Widgets/Layout.dart';
 import 'package:myoffice/Widgets/LeaveRequestCard.dart';
 
 class LeaveRequests extends StatelessWidget {
   List<String> emp = ['digin', 'tom', 'tony', 'cris'];
-
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +31,15 @@ class LeaveRequests extends StatelessWidget {
           child: ListView.builder(
             itemCount: emp.length,
             itemBuilder: (BuildContext context, int index) => LeaveRequestCard(
-              name: "Elon Musk",
-              postion: "Developer",
-              appliedDate: "10-04-2022",
-              leaveDate: "12-04-2022",
-              noLeaves: 5,
-              reason: "Personal",
+              leave: Leave(
+                  id: 1,
+                  leaveDate: '2020/04/20',
+                  appliedDate: '2020/04/15',
+                  name: "Digin Thomas",
+                  postion: 'Php',
+                  reason: "Personal",
+                  status: 0,
+                  noLeave: 4),
             ),
           ),
         ));

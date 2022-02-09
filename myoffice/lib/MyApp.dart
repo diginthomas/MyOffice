@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => Networking(),
-      child: MaterialApp(routes: {
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: {
         '/': (context) => Login(),
         '/home': (context) => Home(),
         '/leave': (context) => LeaveRequests(),

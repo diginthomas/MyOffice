@@ -1,5 +1,3 @@
-
-
 class User {
   int id;
   String name;
@@ -12,10 +10,12 @@ class User {
   String qualification;
   String phone;
   int salary;
+  String password;
   User(
       {required this.id,
       required this.name,
       required this.email,
+      this.password = 'null',
       required this.role,
       required this.userid,
       required this.postion,
