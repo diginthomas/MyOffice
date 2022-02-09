@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:myoffice/Services/Models/Leave.dart';
+import 'package:myoffice/Services/Networking.dart';
 import 'package:myoffice/Widgets/AppbarButtion.dart';
 import 'package:myoffice/Widgets/Layout.dart';
 import 'package:myoffice/Widgets/LeaveRequestCard.dart';
+import 'package:myoffice/Widgets/LoadingAnimator.dart';
 
 class LeaveRequests extends StatelessWidget {
-  List<String> emp = ['digin', 'tom', 'tony', 'cris'];
+  Networking networking = Networking();
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +30,18 @@ class LeaveRequests extends StatelessWidget {
           ],
         ),
         body: Layout(
-          child: ListView.builder(
-            itemCount: emp.length,
-            itemBuilder: (BuildContext context, int index) => LeaveRequestCard(
-              leave: Leave(
-                  id: 1,
-                  leaveDate: '2020/04/20',
-                  appliedDate: '2020/04/15',
-                  name: "Digin Thomas",
-                  postion: 'Php',
-                  reason: "Personal",
-                  status: 0,
-                  noLeave: 4),
-            ),
-          ),
+          child: FutureBuilder(
+              future: networking.getAllLeaves(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return LeaveRequestCard(leave: snapshot.data[index]);
+                      });
+                }
+                return LoadingAnimator();
+              }),
         ));
   }
 }

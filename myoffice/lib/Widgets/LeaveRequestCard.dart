@@ -81,7 +81,7 @@ class LeaveRequestCard extends StatelessWidget {
                         style: style,
                       ),
                       Text(
-                        leave.noLeave.toString(),
+                        leave.leaveCount.toString(),
                         style: style,
                       ),
                     ]),

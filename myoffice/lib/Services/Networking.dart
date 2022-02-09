@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:myoffice/Services/Models/Notice.dart';
 import 'package:myoffice/Services/Models/Suggestion.dart';
 
+import 'Models/Leave.dart';
+
 class Networking extends ChangeNotifier {
   final String url = 'https://myofficerest.herokuapp.com/office';
 //Login system
@@ -136,5 +138,31 @@ class Networking extends ChangeNotifier {
       return true;
     }
     return false;
+  }
+
+  Future<List<Leave>> getAllLeaves() async {
+    List<Leave> leave = [];
+    var response = await http.get(Uri.parse(url + '/leave/get'));
+    if (response.statusCode == 200) {
+      List data = jsonDecode(response.body);
+      print(data);
+      for (int i = 0; i < data.length; i++) {
+        Leave leaveData = Leave(
+            id: data[i]['leaverequest']['id'],
+            name: data[i]['user']['name'],
+            userid: data[i]['user']['id'],
+            postion: data[i]['user']['jobposition'],
+            appliedDate: data[i]['leaverequest']['applieddate'],
+            leaveDate: data[i]['leaverequest']['leavedate'],
+            leaveCount: data[i]['leaverequest']['leavecount'],
+            reason: data[i]['leaverequest']['reason'],
+            status: data[i]['leaverequest']['status']);
+        leave.add(leaveData);
+      }
+    } else {
+      return leave;
+    }
+
+    return leave;
   }
 }

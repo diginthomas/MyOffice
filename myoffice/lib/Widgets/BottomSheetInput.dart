@@ -4,7 +4,6 @@ import 'package:myoffice/Services/Networking.dart';
 import 'package:myoffice/Widgets/Actionbutton.dart';
 import 'package:myoffice/Widgets/InputFields.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:myoffice/Widgets/LoadingAnimator.dart';
 
 class BottomSheetInput extends StatefulWidget {
   @override
@@ -15,12 +14,11 @@ class _BottomSheetInputState extends State<BottomSheetInput> {
   TextEditingController controller = TextEditingController();
 
   Networking network = Networking();
-
   bool status = true;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height / 2,
       child: ListView(
         children: [
@@ -44,10 +42,9 @@ class _BottomSheetInputState extends State<BottomSheetInput> {
                           id: 1,
                           content: controller.text,
                           date: DateTime.now().toString().substring(0, 10)));
-                      print(result);
                       Navigator.pop(context);
                     },
-                    color: Color(0xff0043A4))
+                    color: const Color(0xff0043A4))
                 : Center(
                     child: LoadingAnimationWidget.staggeredDotsWave(
                       color: const Color(0xff6b59ff),
