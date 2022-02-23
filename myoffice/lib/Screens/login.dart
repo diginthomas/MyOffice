@@ -52,7 +52,12 @@ class _Login extends State<Login> {
             SizedBox(
               height: 5,
             ),
-            Input(hintText: "employee id", leabel: "Id", controller: id,charSize: 10,),
+            Input(
+              hintText: "employee id",
+              leabel: "Id",
+              controller: id,
+              charSize: 10,
+            ),
             Input(
               hintText: "Password",
               leabel: "Password",
@@ -72,7 +77,7 @@ class _Login extends State<Login> {
                       // var result = await auth.authUser(id.text, password.text);
                       // print(result);
                       // if (result == '2') {
-                        Navigator.pushNamed(context, '/home');
+                      Navigator.pushReplacementNamed(context, '/home');
                       // } else if (result == '1') {
                       //   setState(() {
                       //     psserror = true;

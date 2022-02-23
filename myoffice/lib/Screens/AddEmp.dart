@@ -59,8 +59,8 @@ class _AddEmp extends State<AddEmp> {
                             addredss: addressController.text,
                             qualification: qualificationController.text,
                             salary: int.parse(salaryController.text),
-                            phone: phoneController.text),
-                        password: passwordController.text);
+                            phone: phoneController.text,
+                        password: passwordController.text));
 
                     if (result) {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -72,7 +72,7 @@ class _AddEmp extends State<AddEmp> {
                       Navigator.pop(context);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          backgroundColor: Color(0xff6b59ff),
+                          backgroundColor: Colors.redAccent,
                           content: Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Text('Something went wrong'),

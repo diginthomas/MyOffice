@@ -15,7 +15,7 @@ class User {
       {required this.id,
       required this.name,
       required this.email,
-      this.password = 'null',
+       required this.password ,
       required this.role,
       required this.userid,
       required this.postion,

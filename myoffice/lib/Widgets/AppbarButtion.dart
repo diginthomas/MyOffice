@@ -4,7 +4,6 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 class AppBarButton extends StatelessWidget {
   bool notification = false;
 
-  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,9 +13,11 @@ class AppBarButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
             color: notification ? Color(0xffD0AAF3) : Color(0xffDADFE3)),
         child: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/home');
+          },
           icon: Icon(
-            notification ? Icons.notifications_active : Icons.notifications,
+            notification ? Icons.home : Icons.home,
             color: Color(0xff6b59ff),
             size: 30,
           ),

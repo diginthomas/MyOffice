@@ -4,7 +4,6 @@ import 'package:myoffice/Services/Models/Users.dart';
 import 'dart:convert';
 import 'package:myoffice/Services/Models/Notice.dart';
 import 'package:myoffice/Services/Models/Suggestion.dart';
-
 import 'Models/Leave.dart';
 
 class Networking extends ChangeNotifier {
@@ -17,7 +16,6 @@ class Networking extends ChangeNotifier {
       String value = response.body;
       return value;
     } else {
-      print(response.statusCode);
       return 'connction error';
     }
   }
@@ -33,6 +31,7 @@ class Networking extends ChangeNotifier {
             id: data[index]['id'],
             name: data[index]['name'],
             email: data[index]['email'],
+            password: data[index]['password'],
             role: data[index]['role'],
             userid: data[index]['userid'],
             postion: data[index]['jobposition'],
@@ -49,21 +48,50 @@ class Networking extends ChangeNotifier {
 
   //Add New employye to server
   Future<bool> addEmployee(
-      {required User user, required String password}) async {
+      {required User user}) async {
     final response = await http.post(Uri.parse(url + '/admin/create'), body: {
       'name': user.name,
       'userid': user.userid.toString(),
       'address': user.addredss,
       'mobile': user.phone,
       'email': user.email,
-      'password': password,
+      'password': user.password,
       'joiningdate': user.joineddate,
       'qualification': user.qualification,
       'jobposition': user.postion,
       'salary': user.salary.toString()
     });
-    print(response.statusCode);
     if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
+  }
+
+  //delete employee
+  Future<bool> deleteEmp({required int id}) async {
+    var result = await http.delete(Uri.parse(url + '/user/delete/$id'));
+    if (result.statusCode == 200) {
+      return false;
+    }
+    return true;
+  }
+
+  //update employee
+  Future<bool> updateEmp({required User user}) async {
+    var result = await http.put(Uri.parse(url + '/user/update'), body: {
+      'id': user.id.toString(),
+      'name': user.name,
+      'userid': user.userid.toString(),
+      'address': user.addredss,
+      'mobile': user.phone,
+      'password':user.password,
+      'email': user.email,
+      'joiningdate': user.joineddate,
+      'qualification': user.qualification,
+      'jobposition': user.postion,
+      'salary': user.salary.toString()
+    });
+    if (result.statusCode == 200) {
       return true;
     }
     return false;
@@ -112,7 +140,6 @@ class Networking extends ChangeNotifier {
     var response = await http.get(
       Uri.parse(url + '/suggestion/get/1'),
     );
-    print(response.statusCode);
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body);
       for (int i = 0; i < data.length; i++) {
@@ -133,25 +160,25 @@ class Networking extends ChangeNotifier {
   Future<bool> voteSuggestion({required int id, required int vote}) async {
     var response = await http.patch(Uri.parse(url + '/suggestion/update'),
         body: {'id': id.toString(), 'vote': vote.toString(), 'userid': '1'});
-    print(response.statusCode);
     if (response.statusCode == 200) {
       return true;
     }
     return false;
   }
 
+//fetching leave requests from server
   Future<List<Leave>> getAllLeaves() async {
     List<Leave> leave = [];
-    var response = await http.get(Uri.parse(url + '/leave/get'));
+    var response = await http.get(Uri.parse(url + '/leave/get/0'));
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body);
-      print(data);
+      // print(data);
       for (int i = 0; i < data.length; i++) {
         Leave leaveData = Leave(
             id: data[i]['leaverequest']['id'],
-            name: data[i]['user']['name'],
-            userid: data[i]['user']['id'],
-            postion: data[i]['user']['jobposition'],
+            name: data[i]['users']['name'],
+            userid: data[i]['users']['id'],
+            postion: data[i]['users']['jobposition'],
             appliedDate: data[i]['leaverequest']['applieddate'],
             leaveDate: data[i]['leaverequest']['leavedate'],
             leaveCount: data[i]['leaverequest']['leavecount'],
@@ -159,10 +186,19 @@ class Networking extends ChangeNotifier {
             status: data[i]['leaverequest']['status']);
         leave.add(leaveData);
       }
+      return leave; //sending new list with data from server
     } else {
-      return leave;
+      return leave; //sending empty list
     }
+  }
 
-    return leave;
+  Future<bool> setStatusForLeave({required int id, required int status}) async {
+    var result = await http.put(Uri.parse(url + '/leave/status'),
+        body: {'id': id.toString(), 'status': status.toString()});
+    if (result.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

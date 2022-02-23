@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myoffice/Services/Networking.dart';
 import 'package:myoffice/Widgets/Actionbutton.dart';
 import 'package:myoffice/Services/Models/Leave.dart';
 
@@ -9,7 +10,9 @@ final TextStyle style = GoogleFonts.sourceCodePro(
 
 class LeaveRequestCard extends StatelessWidget {
   final Leave leave;
-  LeaveRequestCard({required this.leave});
+  final VoidCallback approve;
+  final VoidCallback reject;
+  LeaveRequestCard({required this.leave, required this.approve,required this.reject});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -100,16 +103,12 @@ class LeaveRequestCard extends StatelessWidget {
                   children: [
                     ActionButton(
                       title: 'Approve',
-                      action: () {
-                        print('ok');
-                      },
+                      action: approve,
                       color: Color(0xff0043A4),
                     ),
                     ActionButton(
                       title: '   Reject   ',
-                      action: () {
-                        print('reject');
-                      },
+                      action: reject,
                       color: Colors.redAccent,
                     )
                   ],

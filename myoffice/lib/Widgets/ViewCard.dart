@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myoffice/Screens/EmpUpdate.dart';
+import 'package:myoffice/Services/Networking.dart';
 import 'package:myoffice/Widgets/EmpCardText.dart';
 import 'package:myoffice/Widgets/Actionbutton.dart';
 import 'package:myoffice/Services/Models/Users.dart';
 
 class ViewCard extends StatelessWidget {
   User user;
+  Networking networking = Networking();
   ViewCard({required this.user});
   @override
   Widget build(BuildContext context) {
@@ -66,14 +69,29 @@ class ViewCard extends StatelessWidget {
                           ActionButton(
                             title: 'Update',
                             action: () {
-                              print('ok');
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          EmpUpdate(
+                                            user: user,
+                                          )));
                             },
                             color: Color(0xff0043A4),
                           ),
                           ActionButton(
                             title: '   Delete   ',
                             action: () {
-                              print('Delete');
+                              networking.deleteEmp(id: user.id);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                      backgroundColor: Colors.redAccent,
+                                      content: Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text('Employee Deleted'),
+                                      )));
                             },
                             color: Colors.redAccent,
                           )
