@@ -6,6 +6,8 @@ import 'package:myoffice/Widgets/Layout.dart';
 import 'package:myoffice/Services/Networking.dart';
 import 'package:myoffice/Widgets/ErrorText.dart';
 
+import '../Services/Models/Users.dart';
+
 class Login extends StatefulWidget {
   @override
   _Login createState() {
@@ -54,13 +56,13 @@ class _Login extends State<Login> {
             ),
             Input(
               hintText: "employee id",
-              leabel: "Id",
+              label: "Id",
               controller: id,
               charSize: 10,
             ),
             Input(
               hintText: "Password",
-              leabel: "Password",
+              label: "Password",
               password: true,
               controller: password,
               charSize: 20,
@@ -70,25 +72,28 @@ class _Login extends State<Login> {
                 child: SubmitButton(
                     name: status ? "login" : "Loading...",
                     action: () async {
-                      // setState(() {
-                      //   status = !status;
-                      // });
-                      // var auth = Auth();
-                      // var result = await auth.authUser(id.text, password.text);
-                      // print(result);
-                      // if (result == '2') {
-                      Navigator.pushReplacementNamed(context, '/home');
-                      // } else if (result == '1') {
-                      //   setState(() {
-                      //     psserror = true;
-                      //     status = !status;
-                      //   });
-                      // } else {
-                      //   setState(() {
-                      //     idrror = true;
-                      //     status = !status;
-                      //   });
-                      // }
+                      setState(() {
+                        status = !status;
+                       });
+                       Networking networking = Networking();
+                          User user= await networking.authUser(id.text, password.text);
+                        //  print(user.name);
+                       if (user.name != 'Wrong') {
+                      Navigator.pushReplacementNamed(context, '/home',
+                       arguments: {'user': user});
+                       }
+                        else {
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          backgroundColor: Colors.redAccent,
+                          content: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Wrong password or id'),
+                          )));
+                         setState(() {
+                           idrror = true;
+                           status = !status;
+                        });
+                       }
                     },
                     color: Color(0xff767EED)))
           ],

@@ -4,13 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 class Input extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  final String leabel;
+  final String label;
   bool autofocus, password;
   final int charSize;
   TextInputType keybordtype;
   Input(
       {required this.hintText,
-      required this.leabel,
+      required this.label,
       required this.controller,
       this.password = false,
       this.autofocus = false,
@@ -32,7 +32,7 @@ class Input extends StatelessWidget {
         cursorColor: const Color(0xffB2ABFF),
         decoration: InputDecoration(
             label: Text(
-              leabel,
+              label,
               style: GoogleFonts.sourceCodePro(),
             ),
             hintText: hintText,

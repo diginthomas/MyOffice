@@ -24,7 +24,7 @@ class _BottomSheetInputState extends State<BottomSheetInput> {
         children: [
           Input(
             hintText: "Notice",
-            leabel: "Notice",
+            label: "Notice",
             controller: controller,
             autofocus: true,
             charSize: 100,

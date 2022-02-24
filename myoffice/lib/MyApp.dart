@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myoffice/Screens/AddEmp.dart';
-import 'package:myoffice/Screens/EmpUpdate.dart';
 import 'package:myoffice/Screens/LeaveRequests.dart';
 import 'package:myoffice/Screens/Notice_Board.dart';
 import 'package:myoffice/Screens/login.dart';
@@ -22,7 +21,6 @@ class MyApp extends StatelessWidget {
         '/leave': (context) => LeaveRequests(),
         '/allemp': (context) => AllEmp(),
         '/viewemp': (context) => ViewEmp(),
-        // '/updateemp': (context) => EmpUpdate(),
         '/suggestion': (context) => SuggestionPage(),
         '/notice': (context) => NoticeBoard(),
         '/addemp': (context) => AddEmp()

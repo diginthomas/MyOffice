@@ -90,50 +90,50 @@ class _EmpUpdate extends State<EmpUpdate> {
         children: [
           Input(
               hintText: "Employee Name",
-              leabel: 'Name',
+              label: 'Name',
               controller: nameController,
               charSize: 20),
           Input(
               hintText: "Eg:INF/1014",
-              leabel: "Employee Id",
+              label: "Employee Id",
               controller: empidController,
               charSize: 14),
           Input(
               hintText: 'Postion',
-              leabel: 'Postion',
+              label: 'Postion',
               controller: positionCtroller,
               charSize: 14),
           Input(
               hintText: 'Salary',
-              leabel: 'Salary',
+              label: 'Salary',
               controller: salaryController,
               keybordtype: TextInputType.number,
               charSize: 14),
           Input(
               hintText: 'Email;',
-              leabel: 'Email',
+              label: 'Email',
               controller: emailController,
               keybordtype: TextInputType.emailAddress,
               charSize: 14),
           Input(
               hintText: 'Phone',
-              leabel: 'Phone',
+              label: 'Phone',
               controller: phoneController,
               keybordtype: TextInputType.number,
               charSize: 14),
           Input(
               hintText: 'Address',
-              leabel: "Address",
+              label: "Address",
               controller: addressController,
               charSize: 14),
           Input(
               hintText: 'Qualification',
-              leabel: 'Qualification',
+              label: 'Qualification',
               controller: qualificationController,
               charSize: 14),
           Input(
               hintText: 'DD/MM/YYY',
-              leabel: 'Joined Date',
+              label: 'Joined Date',
               controller: joineddateController,
               keybordtype: TextInputType.datetime,
               charSize: 14)

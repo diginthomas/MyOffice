@@ -9,14 +9,43 @@ import 'Models/Leave.dart';
 class Networking extends ChangeNotifier {
   final String url = 'https://myofficerest.herokuapp.com/office';
 //Login system
-  Future<String> authUser(String userid, String password) async {
+  Future authUser(String userid, String password) async {
     var response = await http.post(Uri.parse(url + '/user/login'),
-        body: {'userid': '$userid', 'password': '$password'});
+        body: {'userid': userid, 'password': password});
     if (response.statusCode == 200) {
-      String value = response.body;
-      return value;
-    } else {
-      return 'connction error';
+      var data = response.body;
+      if (data.isNotEmpty) {
+        List cu = jsonDecode(data);
+        User user = User(
+            id: cu[0]['id'],
+            name: cu[0]['name'],
+            email: cu[0]['email'],
+            password: cu[0]['password'],
+            role: cu[0]['role'],
+            userid: cu[0]['userid'],
+            postion: cu[0]['jobposition'],
+            qualification: cu[0]['qualification'],
+            salary: cu[0]['salary'],
+            joineddate: cu[0]['joiningdate'],
+            addredss: cu[0]['address'],
+            phone: cu[0]['mobile'].toString());
+        return user;
+      } else {
+        //passing dummy user
+        return User(
+            id: 1,
+            name: "Wrong",
+            email: "",
+            password: "",
+            salary: 4,
+            role: "",
+            addredss: "",
+            qualification: "",
+            userid: "",
+            phone: "",
+            postion: "",
+            joineddate: "");
+      }
     }
   }
 
@@ -47,8 +76,7 @@ class Networking extends ChangeNotifier {
   }
 
   //Add New employye to server
-  Future<bool> addEmployee(
-      {required User user}) async {
+  Future<bool> addEmployee({required User user}) async {
     final response = await http.post(Uri.parse(url + '/admin/create'), body: {
       'name': user.name,
       'userid': user.userid.toString(),
@@ -84,7 +112,7 @@ class Networking extends ChangeNotifier {
       'userid': user.userid.toString(),
       'address': user.addredss,
       'mobile': user.phone,
-      'password':user.password,
+      'password': user.password,
       'email': user.email,
       'joiningdate': user.joineddate,
       'qualification': user.qualification,
