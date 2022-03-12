@@ -47,39 +47,61 @@ class _AddEmp extends State<AddEmp> {
                     setState(() {
                       sending = true;
                     });
-                    bool result = await networking.addEmployee(
-                        user: User(
-                            id: 1,
-                            name: nameController.text,
-                            email: emailController.text,
-                            role: 'emp',
-                            userid: empidController.text,
-                            postion: positionCtroller.text,
-                            joineddate: joineddateController.text,
-                            addredss: addressController.text,
-                            qualification: qualificationController.text,
-                            salary: int.parse(salaryController.text),
-                            phone: phoneController.text,
-                        password: passwordController.text));
-
-                    if (result) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          backgroundColor: Color(0xff6b59ff),
-                          content: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text('Data Sucessfully added'),
-                          )));
-                      Navigator.pop(context);
-                    } else {
+                    if (nameController.text == '' ||
+                        emailController.text == '' ||
+                        empidController.text == '' ||
+                        positionCtroller.text == '' ||
+                        salaryController.text == '' ||
+                        addressController.text == '' ||
+                        qualificationController.text == '' ||
+                        joineddateController.text == '' ||
+                        passwordController.text == '') {
+                      setState(() {
+                        sending = false;
+                      });
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           backgroundColor: Colors.redAccent,
                           content: Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: Text('Something went wrong'),
+                            child: Text('Enter Valid Data'),
                           )));
-                      setState(() {
-                        sending = false;
-                      });
+                    } else {
+                      bool result = await networking.addEmployee(
+                          user: User(
+                              id: 1,
+                              name: nameController.text,
+                              email: emailController.text,
+                              role: 'emp',
+                              userid: empidController.text,
+                              postion: positionCtroller.text,
+                              joineddate: joineddateController.text,
+                              addredss: addressController.text,
+                              qualification: qualificationController.text,
+                              salary: int.parse(salaryController.text),
+                              phone: phoneController.text,
+                              password: passwordController.text));
+
+                      if (result) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                                backgroundColor: Color(0xff6b59ff),
+                                content: Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text('Data Sucessfully added'),
+                                )));
+                        Navigator.pop(context);
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                                backgroundColor: Colors.redAccent,
+                                content: Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text('Something went wrong'),
+                                )));
+                        setState(() {
+                          sending = false;
+                        });
+                      }
                     }
                   },
                   icon: Icons.save),

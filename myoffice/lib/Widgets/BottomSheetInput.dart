@@ -38,11 +38,17 @@ class _BottomSheetInputState extends State<BottomSheetInput> {
                       setState(() {
                         status = false;
                       });
-                      bool result = await network.addNotice(Notice(
-                          id: 1,
-                          content: controller.text,
-                          date: DateTime.now().toString().substring(0, 10)));
-                      Navigator.pop(context);
+                      if (controller.text == '') {
+                        setState(() {
+                          status = true;
+                        });
+                      } else {
+                        bool result = await network.addNotice(Notice(
+                            id: 1,
+                            content: controller.text,
+                            date: DateTime.now().toString().substring(0, 10)));
+                        Navigator.pop(context);
+                      }
                     },
                     color: const Color(0xff0043A4))
                 : Center(

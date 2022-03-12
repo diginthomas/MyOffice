@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import '../Services/Models/Users.dart';
 
 class AppBarButton extends StatelessWidget {
   bool notification = false;
-
   @override
   Widget build(BuildContext context) {
     return Container(

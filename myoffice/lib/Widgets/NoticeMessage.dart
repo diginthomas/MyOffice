@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myoffice/Widgets/Actionbutton.dart';
 import 'package:myoffice/Services/Models/Notice.dart';
+import 'package:provider/provider.dart';
+
+import '../Services/CurrentUser.dart';
 
 class NoticeMessage extends StatelessWidget {
   final Notice notice;
@@ -28,11 +31,13 @@ class NoticeMessage extends StatelessWidget {
           ),
           trailing: Padding(
             padding: const EdgeInsets.only(left: 12.0),
-            child: ActionButton(
-              action:action,
-              color: Colors.redAccent,
-              title: 'Delete',
-            ),
+            child: Provider.of<CurrentUser>(context).c_user.role == 'admin'
+                ? ActionButton(
+                    action: action,
+                    color: Colors.redAccent,
+                    title: 'Delete',
+                  )
+                : Text('Admin'),
           ),
         ),
       ),

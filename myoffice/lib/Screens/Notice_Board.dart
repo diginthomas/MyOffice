@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myoffice/Widgets/AppbarActionbutton.dart';
+import 'package:myoffice/Widgets/AppbarButtion.dart';
 import 'package:myoffice/Widgets/BottomSheetInput.dart';
 import 'package:myoffice/Widgets/ErrorMsg.dart';
 import 'package:myoffice/Widgets/Layout.dart';
@@ -8,6 +9,9 @@ import 'package:myoffice/Widgets/NoticeMessage.dart';
 import 'package:myoffice/Services/Models/Notice.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:myoffice/Services/Networking.dart';
+import 'package:provider/provider.dart';
+
+import '../Services/CurrentUser.dart';
 
 class NoticeBoard extends StatefulWidget {
   @override
@@ -31,15 +35,17 @@ class _NoticeBoard extends State<NoticeBoard> {
         backgroundColor: Color(0xff6b59ff),
         elevation: 0.0,
         actions: [
-          AppbarActionButton(
-            icon: EvaIcons.fileAdd,
-            action: () {
-              showModalBottomSheet(
-                  backgroundColor: Color(0xffF6EAFF),
-                  context: context,
-                  builder: (BuildContext contet) => BottomSheetInput());
-            },
-          ),
+          Provider.of<CurrentUser>(context).c_user.role == 'admin'
+              ? AppbarActionButton(
+                  icon: EvaIcons.fileAdd,
+                  action: () {
+                    showModalBottomSheet(
+                        backgroundColor: Color(0xffF6EAFF),
+                        context: context,
+                        builder: (BuildContext contet) => BottomSheetInput());
+                  },
+                )
+              : AppBarButton(),
           SizedBox(
             width: MediaQuery.of(context).size.width / 18,
           )

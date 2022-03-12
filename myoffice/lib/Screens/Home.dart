@@ -1,10 +1,14 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:myoffice/Services/CurrentUser.dart';
 import 'package:myoffice/Services/Models/Users.dart';
+import 'package:myoffice/Widgets/AppbarActionbutton.dart';
 import 'package:myoffice/Widgets/AppbarButtion.dart';
 import 'package:myoffice/Widgets/Cards.dart';
 import 'package:myoffice/Widgets/LongCard.dart';
 import 'package:myoffice/Widgets/Layout.dart';
+import 'package:provider/provider.dart';
+import 'package:myoffice/Services/Networking.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,8 +20,7 @@ class Home extends StatefulWidget {
 class _Home extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    final arguments = ModalRoute.of(context)?.settings.arguments as Map;
-    User user = arguments['user'];
+    User user = Provider.of<CurrentUser>(context).c_user;
     return Scaffold(
         appBar: AppBar(
           title: const Padding(
@@ -29,7 +32,12 @@ class _Home extends State<Home> {
           backgroundColor: Color(0xff6b59ff),
           elevation: 0.0,
           actions: [
-            AppBarButton(),
+            AppbarActionButton(
+                action: () {
+                  Provider.of<CurrentUser>(context, listen: false).deleteUser();
+                  Navigator.pushReplacementNamed(context, '/');
+                },
+                icon: Icons.logout),
             SizedBox(
               width: MediaQuery.of(context).size.width / 18,
             )
@@ -87,7 +95,7 @@ class _Home extends State<Home> {
                     ),
                     LongCard(
                       action: () {
-                        print('notice');
+                        Navigator.pushNamed(context, '/editprofile');
                       },
                       icon: EvaIcons.person,
                       actionicon: EvaIcons.settings,
@@ -103,13 +111,15 @@ class _Home extends State<Home> {
                           icon: EvaIcons.person,
                           title: "My Profile",
                           action: () {
-                            Navigator.pushNamed(context, '/allemp');
+                            Navigator.pushNamed(context, '/myprofile');
                           },
                         ),
                         SquareCard(
                             icon: EvaIcons.paperPlane,
                             title: "Request Leave",
-                            action: () {})
+                            action: () {
+                              Navigator.pushNamed(context, '/leaveform');
+                            })
                       ],
                     ),
                     SizedBox(
@@ -117,7 +127,7 @@ class _Home extends State<Home> {
                     ),
                     LongCard(
                       action: () {
-                        Navigator.pushNamed(context, '/notice');
+                        Navigator.pushNamed(context, '/leaveform');
                       },
                       icon: EvaIcons.inboxOutline,
                       actionicon: EvaIcons.eye,
@@ -141,7 +151,7 @@ class _Home extends State<Home> {
                     ),
                     LongCard(
                       action: () {
-                        print('notice');
+                        Navigator.pushNamed(context, '/editprofile');
                       },
                       icon: EvaIcons.person,
                       actionicon: EvaIcons.settings,

@@ -63,40 +63,42 @@ class ViewCard extends StatelessWidget {
                       ),
                       EmpCardText(title: 'Email', value: user.email),
                       EmpCardText(title: 'Phone', value: user.phone),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ActionButton(
-                            title: 'Update',
-                            action: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          EmpUpdate(
-                                            user: user,
-                                          )));
-                            },
-                            color: Color(0xff0043A4),
-                          ),
-                          ActionButton(
-                            title: '   Delete   ',
-                            action: () {
-                              networking.deleteEmp(id: user.id);
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                      backgroundColor: Colors.redAccent,
-                                      content: Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Text('Employee Deleted'),
-                                      )));
-                            },
-                            color: Colors.redAccent,
-                          )
-                        ],
-                      )
+                      user.role == "admin"
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                ActionButton(
+                                  title: 'Update',
+                                  action: () {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                EmpUpdate(
+                                                  user: user,
+                                                )));
+                                  },
+                                  color: Color(0xff0043A4),
+                                ),
+                                ActionButton(
+                                  title: '   Delete   ',
+                                  action: () {
+                                    networking.deleteEmp(id: user.id);
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                            backgroundColor: Colors.redAccent,
+                                            content: Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: Text('Employee Deleted'),
+                                            )));
+                                  },
+                                  color: Colors.redAccent,
+                                )
+                              ],
+                            )
+                          : SizedBox()
                     ],
                   ),
                 ),

@@ -56,28 +56,44 @@ class _EmpUpdate extends State<EmpUpdate> {
         actions: [
           AppbarActionButton(
               action: () {
-                networking.updateEmp(
-                    user: User(
-                        id: widget.user.id,
-                        name: nameController.text,
-                        email: emailController.text,
-                        role: widget.user.role,
-                        userid: empidController.text,
-                        postion: positionCtroller.text,
-                        password: widget.user.password,
-                        joineddate: joineddateController.text,
-                        addredss: addressController.text,
-                        qualification: qualificationController.text,
-                        salary: int.parse(salaryController.text),
-                        phone: phoneController.text));
-                Navigator.pop(context);
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    backgroundColor: Color(0xff6b59ff),
-                    content: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Employee Updated'),
-                    )));
+                if (nameController.text == '' ||
+                    emailController.text == '' ||
+                    empidController.text == '' ||
+                    positionCtroller.text == '' ||
+                    salaryController.text == '' ||
+                    addressController.text == '' ||
+                    qualificationController.text == '' ||
+                    joineddateController.text == '') {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      backgroundColor: Colors.redAccent,
+                      content: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Enter valid data'),
+                      )));
+                } else {
+                  networking.updateEmp(
+                      user: User(
+                          id: widget.user.id,
+                          name: nameController.text,
+                          email: emailController.text,
+                          role: widget.user.role,
+                          userid: empidController.text,
+                          postion: positionCtroller.text,
+                          password: widget.user.password,
+                          joineddate: joineddateController.text,
+                          addredss: addressController.text,
+                          qualification: qualificationController.text,
+                          salary: int.parse(salaryController.text),
+                          phone: phoneController.text));
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      backgroundColor: Color(0xff6b59ff),
+                      content: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Employee Updated'),
+                      )));
+                }
               },
               icon: EvaIcons.upload),
           SizedBox(

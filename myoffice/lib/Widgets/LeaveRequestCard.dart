@@ -90,8 +90,8 @@ class LeaveRequestCard extends StatelessWidget {
                     ]),
                   ],
                 ),
-                Divider(
-                  height: 14,
+                const Divider(
+                  height: 14.0,
                   color: Color(0xffACACAC),
                 ),
                 Text(

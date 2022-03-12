@@ -6,7 +6,22 @@ import 'package:myoffice/Services/Models/Notice.dart';
 import 'package:myoffice/Services/Models/Suggestion.dart';
 import 'Models/Leave.dart';
 
-class Networking extends ChangeNotifier {
+final User tempUser = User(
+    id: 1,
+    name: "Wrong",
+    email: "",
+    password: "",
+    salary: 4,
+    role: "",
+    addredss: "",
+    qualification: "",
+    userid: "",
+    phone: "",
+    postion: "",
+    joineddate: "");
+
+class Networking {
+ 
   final String url = 'https://myofficerest.herokuapp.com/office';
 //Login system
   Future authUser(String userid, String password) async {
@@ -14,39 +29,29 @@ class Networking extends ChangeNotifier {
         body: {'userid': userid, 'password': password});
     if (response.statusCode == 200) {
       var data = response.body;
+
       if (data.isNotEmpty) {
-        List cu = jsonDecode(data);
+        var cu = jsonDecode(data);
         User user = User(
-            id: cu[0]['id'],
-            name: cu[0]['name'],
-            email: cu[0]['email'],
-            password: cu[0]['password'],
-            role: cu[0]['role'],
-            userid: cu[0]['userid'],
-            postion: cu[0]['jobposition'],
-            qualification: cu[0]['qualification'],
-            salary: cu[0]['salary'],
-            joineddate: cu[0]['joiningdate'],
-            addredss: cu[0]['address'],
-            phone: cu[0]['mobile'].toString());
-        return user;
+            id: cu['id'],
+            name: cu['name'],
+            email: cu['email'],
+            password: cu['password'],
+            role: cu['role'],
+            userid: cu['userid'],
+            postion: cu['jobposition'],
+            qualification: cu['qualification'],
+            salary: cu['salary'],
+            joineddate: cu['joiningdate'],
+            addredss: cu['address'],
+            phone: cu['mobile'].toString());
+           return user;
       } else {
         //passing dummy user
-        return User(
-            id: 1,
-            name: "Wrong",
-            email: "",
-            password: "",
-            salary: 4,
-            role: "",
-            addredss: "",
-            qualification: "",
-            userid: "",
-            phone: "",
-            postion: "",
-            joineddate: "");
+        return tempUser;
       }
     }
+     return tempUser;
   }
 
 //Fetch all user from Server
