@@ -3,6 +3,7 @@ import 'package:myoffice/Screens/AddEmp.dart';
 import 'package:myoffice/Screens/EditProfile.dart';
 import 'package:myoffice/Screens/LeaveForm.dart';
 import 'package:myoffice/Screens/LeaveRequests.dart';
+import 'package:myoffice/Screens/MyLeaves.dart';
 import 'package:myoffice/Screens/MyProfile.dart';
 import 'package:myoffice/Screens/Notice_Board.dart';
 import 'package:myoffice/Screens/login.dart';
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
         '/addemp': (context) => AddEmp(),
         '/myprofile': (context) => MyProfile(),
         '/editprofile': (context) => EditProfile(),
-        '/leaveform':(context)=>LeaveForm()
+        '/leaveform':(context)=>LeaveForm(),
+        '/myleaves':(context)=>MyLeave()
       }),
     );
   }

@@ -21,7 +21,6 @@ final User tempUser = User(
     joineddate: "");
 
 class Networking {
- 
   final String url = 'https://myofficerest.herokuapp.com/office';
 //Login system
   Future authUser(String userid, String password) async {
@@ -45,13 +44,13 @@ class Networking {
             joineddate: cu['joiningdate'],
             addredss: cu['address'],
             phone: cu['mobile'].toString());
-           return user;
+        return user;
       } else {
         //passing dummy user
         return tempUser;
       }
     }
-     return tempUser;
+    return tempUser;
   }
 
 //Fetch all user from Server
@@ -210,7 +209,7 @@ class Networking {
         Leave leaveData = Leave(
             id: data[i]['leaverequest']['id'],
             name: data[i]['users']['name'],
-            userid: data[i]['users']['id'],
+            userid: data[i]['users']['id'].toString(),
             postion: data[i]['users']['jobposition'],
             appliedDate: data[i]['leaverequest']['applieddate'],
             leaveDate: data[i]['leaverequest']['leavedate'],
@@ -232,6 +231,51 @@ class Networking {
       return true;
     } else {
       return false;
+    }
+  }
+
+  Future<bool> applyLeave(Leave leave) async {
+    var result = await http.post(Uri.parse(url + '/leave/create'), body: {
+      'id': leave.id.toString(),
+      'userid': leave.userid,
+      'leavecount': leave.leaveCount.toString(),
+      'reason': leave.reason,
+      'leavedate': leave.leaveDate,
+      'applieddate': leave.appliedDate,
+      'status': leave.status.toString()
+    });
+
+    if (result.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<List<Leave>> getMyLeaves(String userid) async {
+    List<Leave> leave = [];
+    var result =
+        await http.get(Uri.parse(url + '/leave/getuserleave/' + userid));
+    if (result.statusCode == 200) {
+      List data = jsonDecode(result.body);
+
+      for (int i = 0; i < data.length; i++) {
+        Leave leaveData = Leave(
+            id: data[i]['id'],
+            name: '',
+            userid: data[i]['id'].toString(),
+            postion: '',
+            appliedDate: data[i]['applieddate'],
+            leaveDate: data[i]['leavedate'],
+            leaveCount: data[i]['leavecount'],
+            reason: data[i]['reason'],
+            status: data[i]['status']);
+        leave.add(leaveData);
+      }
+
+      return leave; //sending new list with data from server
+    } else {
+      return leave; //sending empty list
     }
   }
 }

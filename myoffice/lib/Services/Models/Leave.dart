@@ -1,6 +1,6 @@
 class Leave {
   int id;
-  int userid;
+  String userid;
   String name;
   String postion;
   String appliedDate;

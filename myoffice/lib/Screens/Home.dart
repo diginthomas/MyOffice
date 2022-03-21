@@ -127,7 +127,7 @@ class _Home extends State<Home> {
                     ),
                     LongCard(
                       action: () {
-                        Navigator.pushNamed(context, '/leaveform');
+                        Navigator.pushNamed(context, '/myleaves');
                       },
                       icon: EvaIcons.inboxOutline,
                       actionicon: EvaIcons.eye,
