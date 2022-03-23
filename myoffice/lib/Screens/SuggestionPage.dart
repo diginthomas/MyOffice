@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:myoffice/Services/Models/Suggestion.dart';
 import 'package:myoffice/Services/Networking.dart';
@@ -6,6 +7,12 @@ import 'package:myoffice/Widgets/ErrorMsg.dart';
 import 'package:myoffice/Widgets/Layout.dart';
 import 'package:myoffice/Widgets/LoadingAnimator.dart';
 import 'package:myoffice/Widgets/SuggestionCard.dart';
+import 'package:myoffice/Widgets/SuggestionSheet.dart';
+import 'package:provider/provider.dart';
+
+import '../Services/CurrentUser.dart';
+import '../Widgets/AppbarActionbutton.dart';
+import '../Widgets/BottomSheetInput.dart';
 
 class SuggestionPage extends StatefulWidget {
   @override
@@ -18,6 +25,8 @@ class _SuggestionPage extends State<SuggestionPage> {
   Networking networking = Networking();
   @override
   Widget build(BuildContext context) {
+    int id = Provider.of<CurrentUser>(context, listen: false).c_user.id;
+    String role = Provider.of<CurrentUser>(context, listen: false).c_user.role;
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
@@ -30,7 +39,17 @@ class _SuggestionPage extends State<SuggestionPage> {
         backgroundColor: Color(0xff6b59ff),
         elevation: 0.0,
         actions: [
-          AppBarButton(),
+          Provider.of<CurrentUser>(context).c_user.role != 'admin'
+              ? AppbarActionButton(
+                  icon: EvaIcons.fileAdd,
+                  action: () {
+                    showModalBottomSheet(
+                        backgroundColor: Color(0xffF6EAFF),
+                        context: context,
+                        builder: (BuildContext context) => SuggestionSheet());
+                  },
+                )
+              : AppBarButton(),
           SizedBox(
             width: MediaQuery.of(context).size.width / 18,
           )
@@ -38,7 +57,7 @@ class _SuggestionPage extends State<SuggestionPage> {
       ),
       body: Layout(
         child: FutureBuilder(
-            future: networking.getSuggestion(),
+            future:role=='admin'?networking.getSuggestion(0): networking.getSuggestion(id),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.data != null) {
                 return snapshot.data != []

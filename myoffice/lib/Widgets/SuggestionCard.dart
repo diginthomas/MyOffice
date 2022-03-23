@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myoffice/Services/CurrentUser.dart';
 import 'package:myoffice/Services/Networking.dart';
 import 'package:myoffice/Widgets/Actionbutton.dart';
 import 'package:myoffice/Services/Models/Suggestion.dart';
+import 'package:provider/provider.dart';
 
 class SuggestionCard extends StatefulWidget {
   final Suggestion suggestion;
@@ -28,6 +30,7 @@ class _SuggestionCardState extends State<SuggestionCard> {
 
   @override
   Widget build(BuildContext context) {
+    String role = Provider.of<CurrentUser>(context, listen: false).c_user.role;
     return Card(
       color: Color(0xffF7F2FD),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
@@ -45,17 +48,27 @@ class _SuggestionCardState extends State<SuggestionCard> {
               style: GoogleFonts.sourceCodePro(
                   fontSize: MediaQuery.of(context).size.width / 22),
             ),
-            trailing: ActionButton(
-                title: 'Delete',
-                action: () {
-                  print('delte');
-                },
-                color: Colors.redAccent),
+            trailing: role == 'admin'
+                ? ActionButton(
+                    title: 'Delete',
+                    action: () {
+                      Networking networking = Networking();
+                      networking.deleteSuggestion(widget.suggestion.id);
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          backgroundColor: Color(0xff6b59ff),
+                          content: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Suggestion Deleted'),
+                          )));
+                    },
+                    color: Colors.redAccent)
+                : SizedBox(),
           ),
           Divider(
             color: Colors.grey,
           ),
-          !vote
+          !vote && role != 'admin'
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

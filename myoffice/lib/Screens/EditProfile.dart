@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:myoffice/Services/Networking.dart';
 import 'package:myoffice/Widgets/Actionbutton.dart';
 import 'package:myoffice/Widgets/InputFields.dart';
 import 'package:myoffice/Widgets/Layout.dart';
+import 'package:provider/provider.dart';
+import '../Services/CurrentUser.dart';
 import '../Widgets/AppbarButtion.dart';
 
 class EditProfile extends StatefulWidget {
@@ -12,10 +15,13 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfile extends State<EditProfile> {
+  bool status = false;
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfirmController = TextEditingController();
+  Networking networking = Networking();
   @override
   Widget build(BuildContext context) {
+    int id = Provider.of<CurrentUser>(context, listen: false).c_user.id;
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
@@ -51,8 +57,8 @@ class _EditProfile extends State<EditProfile> {
             password: true,
           ),
           ActionButton(
-              title: 'Update',
-              action: () {
+              title: status ? 'Updating' : 'Update',
+              action: () async {
                 if (passwordController.text != passwordController.text ||
                     passwordConfirmController.text == '' ||
                     passwordController.text == '') {
@@ -62,7 +68,32 @@ class _EditProfile extends State<EditProfile> {
                         padding: EdgeInsets.all(8.0),
                         child: Text('please enter valid data'),
                       )));
-                } else {}
+                } else {
+                  setState(() {
+                    status = true;
+                  });
+                  bool result = await networking.changePassword(
+                      id, passwordController.text);
+                  if (result) {
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        backgroundColor: Color(0xff6b59ff),
+                        content: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('Password updated'),
+                        )));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        backgroundColor: Colors.redAccent,
+                        content: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('Cant update password'),
+                        )));
+                    setState(() {
+                      status = false;
+                    });
+                  }
+                }
               },
               color: Color(0xff0043A4))
         ],

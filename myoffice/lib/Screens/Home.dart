@@ -21,6 +21,7 @@ class _Home extends State<Home> {
   @override
   Widget build(BuildContext context) {
     User user = Provider.of<CurrentUser>(context).c_user;
+    print(user.id);
     return Scaffold(
         appBar: AppBar(
           title: const Padding(

@@ -16,6 +16,7 @@ class MyProfile extends StatefulWidget {
 class _MyProfile extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff6b59ff),

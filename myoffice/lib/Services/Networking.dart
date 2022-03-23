@@ -167,10 +167,10 @@ class Networking {
   }
 
   //get all suggestion from server
-  Future<List<Suggestion>> getSuggestion() async {
+  Future<List<Suggestion>> getSuggestion(int id) async {
     List<Suggestion> suggestion = [];
     var response = await http.get(
-      Uri.parse(url + '/suggestion/get/1'),
+      Uri.parse(url + '/suggestion/get/$id'),
     );
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body);
@@ -183,9 +183,38 @@ class Networking {
             downvote: data[i]['downvote']);
         suggestion.add(suggestiondata);
       }
-      return suggestion;
+      if (id == 0) {
+        return suggestion;
+      } else {
+        List<Suggestion> data = [];
+        data.add(suggestion[0]);
+
+        return data;
+      }
     }
     return suggestion;
+  }
+
+  Future<bool> addSuggestion(Suggestion suggestion, int id) async {
+    var response = await http.post(Uri.parse(url + '/suggestion/add'), body: {
+      'content': suggestion.content,
+      'date': suggestion.date,
+      'upvote': suggestion.upvote.toString(),
+      'downvote': '0',
+      'userid': id.toString()
+    });
+    print(response.statusCode);
+    return true;
+  }
+
+  Future<bool> deleteSuggestion(int id) async {
+    var result = await http.delete(Uri.parse(url + '/suggestion/delete'),
+        body: {'id': id.toString()});
+    if (result.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   //record vote
@@ -244,7 +273,7 @@ class Networking {
       'applieddate': leave.appliedDate,
       'status': leave.status.toString()
     });
-
+    print(result.statusCode);
     if (result.statusCode == 200) {
       return true;
     } else {
@@ -276,6 +305,17 @@ class Networking {
       return leave; //sending new list with data from server
     } else {
       return leave; //sending empty list
+    }
+  }
+
+  Future<bool> changePassword(int id, String password) async {
+    print(id);
+    var result = await http.put(Uri.parse(url + '/user/change'),
+        body: {'id': id.toString(), 'password': password});
+    if (result.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
